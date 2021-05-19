@@ -11,13 +11,13 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      filename: "./public/index.html",
+      template: path.resolve(__dirname, "public/index.html"),
       title: "Weather App",
     }),
   ],
 
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, "dist/public"),
     compress: true,
     port: 9000,
   },
