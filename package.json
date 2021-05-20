@@ -36,6 +36,7 @@
     "mrm": "^3.0.1",
     "mrm-task-lint-staged": "^6.0.0",
     "prettier": "^2.3.0",
+    "style-loader": "^2.0.0",
     "webpack": "^5.37.1",
     "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^3.11.2"
