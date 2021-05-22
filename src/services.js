@@ -9,7 +9,7 @@ async function getWeatherByCity(city) {
   if (response.ok) {
     return response.json();
   }
-  alert("A error occurred while sending the request!");
+
   return false;
 }
 
@@ -24,4 +24,21 @@ async function getCity() {
   return res.city;
 }
 
-export { getWeatherByCity, getCity };
+function staticMapUrl(coords) {
+  const { lat, lon } = coords;
+  const key = "JlKtJ5EFyri7nHAgFPPohAADdjnGYR4N";
+  return `https://open.mapquestapi.com/staticmap/v4/getmap?key=${key}&size=600,400&zoom=13&center=${lat},${lon}`;
+}
+
+function addCityToLocalStorage(city) {
+  const cityClear = String(city).trim();
+  if (cityClear.length < 1) {
+    throw new Error("City can't be empty");
+  }
+  const cityCapitalized = cityClear[0].toUpperCase() + cityClear.slice(1);
+  if (localStorage.getItem(cityCapitalized) == null) {
+    localStorage.setItem(cityCapitalized, cityCapitalized);
+  }
+}
+
+export { getWeatherByCity, getCity, addCityToLocalStorage, staticMapUrl };
