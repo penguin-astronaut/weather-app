@@ -40,16 +40,18 @@ async function initCity() {
 function updateCitiesList() {
   const list = document.querySelector(".cities");
   list.innerHTML = "";
-  const lsLength = localStorage.length;
-  const startElement = lsLength > 10 ? lsLength - 10 : 0;
+  const cities = JSON.parse(localStorage.getItem("cites")) ?? [];
 
-  for (let i = startElement; i < lsLength; i += 1) {
-    const key = localStorage.key(i);
-    list.insertAdjacentHTML(
-      "beforeend",
-      `<li>${localStorage.getItem(key)}</li>`
-    );
+  if (!Array.isArray(cities)) {
+    throw new Error("cities must by array");
   }
+
+  const startElement = cities.length > 10 ? cities.length - 10 : 0;
+  const lastCities = cities.slice(startElement);
+
+  lastCities.forEach((item) => {
+    list.insertAdjacentHTML("beforeend", `<li>${item}</li>`);
+  });
 }
 
 function templateInit() {

@@ -36,9 +36,14 @@ function addCityToLocalStorage(city) {
     throw new Error("City can't be empty");
   }
   const cityCapitalized = cityClear[0].toUpperCase() + cityClear.slice(1);
-  if (localStorage.getItem(cityCapitalized) == null) {
-    localStorage.setItem(cityCapitalized, cityCapitalized);
+
+  const storageCities = localStorage.getItem("cites");
+  const cites = JSON.parse(storageCities) ?? [];
+  if (!cites.includes(cityCapitalized)) {
+    cites.push(cityCapitalized);
   }
+
+  localStorage.setItem("cites", JSON.stringify(cites));
 }
 
 export { getWeatherByCity, getCity, addCityToLocalStorage, staticMapUrl };
