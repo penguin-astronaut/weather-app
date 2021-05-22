@@ -1,0 +1,18 @@
+* {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.weather {
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+.weather span {
+  font-weight: bold;
+}
+
+.weather__temp {
+  display: flex;
+  align-items: center;
+}
