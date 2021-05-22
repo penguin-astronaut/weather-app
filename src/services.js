@@ -42,7 +42,6 @@ function addCityToLocalStorage(city) {
   if (!cites.includes(cityCapitalized)) {
     cites.push(cityCapitalized);
   }
-
   localStorage.setItem("cites", JSON.stringify(cites));
 }
 

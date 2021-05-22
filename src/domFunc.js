@@ -14,7 +14,7 @@ async function updateWeatherInfo(city) {
   const weather = await getWeatherByCity(city);
   if (!weather) {
     alert("Something is wrong, are you sure you entered the correct city?");
-    return;
+    return false;
   }
 
   document.querySelector(".weather__city span").textContent = weather.name;
@@ -26,6 +26,7 @@ async function updateWeatherInfo(city) {
   ).src = `http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
 
   renderMap(weather.coord);
+  return true;
 }
 
 async function initCity() {
