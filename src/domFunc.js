@@ -18,8 +18,9 @@ async function updateWeatherInfo(city) {
   }
 
   document.querySelector(".weather__city span").textContent = weather.name;
-  document.querySelector(".weather__temp span").innerHTML =
-    `${weather.main.temp  }	&#8451;`;
+  document.querySelector(
+    ".weather__temp span"
+  ).innerHTML = `${weather.main.temp}	&#8451;`;
   document.querySelector(
     ".weather__icon"
   ).src = `http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
@@ -68,7 +69,7 @@ function templateInit() {
 
   const form = document.querySelector(".form");
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const city = document.querySelector(".input").value.trim();
@@ -77,9 +78,10 @@ function templateInit() {
       return;
     }
 
-    updateWeatherInfo(city);
-    addCityToLocalStorage(city);
-    updateCitiesList();
+    if (await updateWeatherInfo(city)) {
+      addCityToLocalStorage(city);
+      updateCitiesList();
+    }
   });
 }
 
