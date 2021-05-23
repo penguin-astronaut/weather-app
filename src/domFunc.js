@@ -76,6 +76,12 @@ function templateInit() {
       updateCitiesList();
     }
   });
+
+  document.querySelector(".cities").addEventListener("click", (e) => {
+    if (e.target.tagName === "LI") {
+      updateWeatherInfo(e.target.textContent);
+    }
+  });
 }
 
 export { templateInit, updateCitiesList, renderMap, updateWeatherInfo };
