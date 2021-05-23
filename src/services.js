@@ -37,9 +37,13 @@ function staticMapUrl(coords) {
 }
 
 function addCityToLocalStorage(city) {
+  if (typeof city !== "string") {
+    throw new Error("City must be string");
+  }
+
   const cityClear = String(city).trim();
-  if (typeof cityClear !== "string" || cityClear.length < 1) {
-    throw new Error("City must be string and can't be empty");
+  if (cityClear.length < 1) {
+    throw new Error("City can't be empty");
   }
   const cityCapitalized = cityClear[0].toUpperCase() + cityClear.slice(1);
 
