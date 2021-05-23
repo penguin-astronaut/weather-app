@@ -58,7 +58,7 @@ describe("getCity", () => {
       })
     );
 
-    expect(await getWeatherByCity("Moscow")).toBeFalsy();
+    expect(await getCity()).toBeFalsy();
   });
 });
 
