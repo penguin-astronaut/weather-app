@@ -33,10 +33,6 @@ function updateCitiesList() {
   list.innerHTML = "";
   const cities = JSON.parse(localStorage.getItem("cities")) ?? [];
 
-  if (!Array.isArray(cities)) {
-    throw new Error("cities must by array");
-  }
-
   const startElement = cities.length > 10 ? cities.length - 10 : 0;
   const lastCities = cities.slice(startElement);
 
