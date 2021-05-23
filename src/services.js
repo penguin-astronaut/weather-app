@@ -48,7 +48,7 @@ function addCityToLocalStorage(city) {
   if (!cites.includes(cityCapitalized)) {
     cites.push(cityCapitalized);
   }
-  localStorage.setItem("cites", JSON.stringify(cites));
+  localStorage.setItem("cities", JSON.stringify(cites));
 }
 
 export { getWeatherByCity, getCity, addCityToLocalStorage, staticMapUrl };

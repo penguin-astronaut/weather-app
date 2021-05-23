@@ -41,7 +41,7 @@ async function initCity() {
 function updateCitiesList() {
   const list = document.querySelector(".cities");
   list.innerHTML = "";
-  const cities = JSON.parse(localStorage.getItem("cites")) ?? [];
+  const cities = JSON.parse(localStorage.getItem("cities")) ?? [];
 
   if (!Array.isArray(cities)) {
     throw new Error("cities must by array");
