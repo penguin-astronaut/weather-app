@@ -41,7 +41,7 @@ function addCityToLocalStorage(city) {
     throw new Error("City must be string");
   }
 
-  const cityClear = String(city).trim();
+  const cityClear = String(city).trim().toLowerCase();
   if (cityClear.length < 1) {
     throw new Error("City can't be empty");
   }
