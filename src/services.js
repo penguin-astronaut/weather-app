@@ -28,6 +28,9 @@ async function getCity() {
 }
 
 function staticMapUrl(coords) {
+  if (typeof coords !== "object" || !coords.lat || !coords.lon) {
+    throw new Error("coords must by object and contain properties lat and lon");
+  }
   const { lat, lon } = coords;
   const key = "JlKtJ5EFyri7nHAgFPPohAADdjnGYR4N";
   return `https://open.mapquestapi.com/staticmap/v4/getmap?key=${key}&size=600,400&zoom=13&center=${lat},${lon}`;
@@ -35,8 +38,8 @@ function staticMapUrl(coords) {
 
 function addCityToLocalStorage(city) {
   const cityClear = String(city).trim();
-  if (cityClear.length < 1) {
-    throw new Error("City can't be empty");
+  if (typeof cityClear === "string" && cityClear.length < 1) {
+    throw new Error("City must be string and can't be empty");
   }
   const cityCapitalized = cityClear[0].toUpperCase() + cityClear.slice(1);
 
