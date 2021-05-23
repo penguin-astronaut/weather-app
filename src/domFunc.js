@@ -1,6 +1,5 @@
 import {
   getWeatherByCity,
-  getCity,
   addCityToLocalStorage,
   staticMapUrl,
 } from "./services";
@@ -27,15 +26,6 @@ async function updateWeatherInfo(city) {
 
   renderMap(weather.coord);
   return true;
-}
-
-async function initCity() {
-  const city = await getCity();
-  if (!city) {
-    return;
-  }
-
-  updateWeatherInfo(city);
 }
 
 function updateCitiesList() {
@@ -88,4 +78,4 @@ function templateInit() {
   });
 }
 
-export { templateInit, updateCitiesList, initCity, renderMap };
+export { templateInit, updateCitiesList, renderMap, updateWeatherInfo };

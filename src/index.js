@@ -1,6 +1,12 @@
-import { templateInit, updateCitiesList, initCity } from "./domFunc";
+import { templateInit, updateCitiesList, updateWeatherInfo } from "./domFunc";
+import { getCity } from "./services";
 import "./style.css";
 
-templateInit();
-initCity();
-updateCitiesList();
+(async () => {
+  templateInit();
+  const city = await getCity();
+  if (city) {
+    updateWeatherInfo(city);
+  }
+  updateCitiesList();
+})();
