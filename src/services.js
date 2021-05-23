@@ -6,7 +6,7 @@ async function getWeatherByCity(city) {
   const baseUrl = "http://api.openweathermap.org/data/2.5/";
 
   const response = await fetch(
-    `${baseUrl}/weather?q=${city}&appid=${key}&units=metric`
+    `${baseUrl}weather?q=${city}&appid=${key}&units=metric`
   );
 
   if (response.ok) {
