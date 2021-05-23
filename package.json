@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "prettier --check . && eslint .",
     "lint:fix": "prettier --write . && eslint . --fix",
     "prepare": "husky install",
@@ -25,6 +25,7 @@
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
+    "@types/jest": "^26.0.23",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.5",
     "eslint": "^7.26.0",
@@ -33,6 +34,7 @@
     "eslint-plugin-import": "^2.23.2",
     "html-webpack-plugin": "^5.3.1",
     "husky": "^6.0.0",
+    "jest": "^26.6.3",
     "lint-staged": "^11.0.0",
     "mrm": "^3.0.1",
     "mrm-task-lint-staged": "^6.0.0",
