@@ -18,9 +18,9 @@ jobs:
       - name: Lint check
         run: |
           npm run test
-      
       - name: Coverage check
         run: |
           npm run test
       - name: Deploy to gh
-          npm run 
+        run: |
+          npm run deploy
