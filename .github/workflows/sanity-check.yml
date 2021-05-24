@@ -19,8 +19,7 @@ jobs:
       - name: Test check
         run: |
           npm run test
-      - name: Deploy to gh
-        run: |
-          npm run deploy
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch:
