@@ -22,3 +22,5 @@ jobs:
       - name: Coverage check
         run: |
           npm run test -- --coverage
+      - name: Deploy to gh
+          npm run 
