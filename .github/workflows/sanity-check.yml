@@ -21,8 +21,3 @@ jobs:
       - name: Coverage check
         run: |
           npm run test
-      - name: Deploy to gh
-        run: |
-          npm run deploy
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
