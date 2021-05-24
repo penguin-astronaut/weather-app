@@ -53,8 +53,5 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1"
-  },
-  "eslintIgnore": [
-    "/dist"
-  ]
+  }
 }
