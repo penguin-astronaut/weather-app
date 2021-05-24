@@ -6,7 +6,7 @@
 
 Приложение на GitHub Pages:
 
-      https://penguin-astronaut.github.io/weather-app/
+      [https://penguin-astronaut.github.io/weather-app/](https://penguin-astronaut.github.io/weather-app/)
 
 ## Структура проекта
 
