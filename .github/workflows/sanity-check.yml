@@ -5,11 +5,11 @@ on: pull_request
 jobs:
   lint:
     runs-on: ubuntu-20.04
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Install Packages
         run: |
           npm install
