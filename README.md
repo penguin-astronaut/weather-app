@@ -2,7 +2,7 @@
 
 Приложение для просмотра погоды в выбранном городе
 
-![tests](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+[![PR Sanity Check](https://github.com/penguin-astronaut/weather-app/actions/workflows/sanity-check.yml/badge.svg)](https://github.com/penguin-astronaut/weather-app/actions/workflows/sanity-check.yml)
 
 Приложение на GitHub Pages:
 
