@@ -24,3 +24,5 @@ jobs:
       - name: Deploy to gh
         run: |
           npm run deploy
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
