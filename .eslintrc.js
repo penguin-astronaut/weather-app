@@ -12,6 +12,5 @@ module.exports = {
   rules: {
     "no-alert": "off",
   },
-  ignorePatterns: ["/dist"],
   plugins: ["jest"],
 };
