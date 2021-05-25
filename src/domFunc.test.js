@@ -47,7 +47,7 @@ describe("update info", () => {
     );
     expect(await updateWeatherInfo("izhevsk")).toBeTruthy();
     expect(fetch).toBeCalledWith(
-      "http://api.openweathermap.org/data/2.5/weather?q=izhevsk&appid=619769815d2e235e82cf7ee1a4435658&units=metric"
+      "https://api.openweathermap.org/data/2.5/weather?q=izhevsk&appid=619769815d2e235e82cf7ee1a4435658&units=metric"
     );
 
     expect(document.querySelector(".weather__city span").innerHTML).toBe(
