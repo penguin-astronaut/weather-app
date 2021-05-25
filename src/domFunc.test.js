@@ -57,7 +57,7 @@ describe("update info", () => {
       `${weatherApi.main.temp}	℃`
     );
     expect(document.querySelector(".weather__icon").src).toBe(
-      `http://openweathermap.org/img/wn/${weatherApi.weather[0].icon}.png`
+      `https://openweathermap.org/img/wn/${weatherApi.weather[0].icon}.png`
     );
   });
 
