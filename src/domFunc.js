@@ -22,7 +22,7 @@ async function updateWeatherInfo(city) {
   ).innerHTML = `${weather.main.temp}	&#8451;`;
   document.querySelector(
     ".weather__icon"
-  ).src = `http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
+  ).src = `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
 
   renderMap(weather.coord);
   return true;
