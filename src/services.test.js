@@ -22,7 +22,7 @@ describe("getWeatherByCity", () => {
 
     expect(await getWeatherByCity("Moscow")).toEqual({ weather: "test" });
     expect(fetch).toHaveBeenCalledWith(
-      "http://api.openweathermap.org/data/2.5/weather?q=Moscow&appid=619769815d2e235e82cf7ee1a4435658&units=metric"
+      "https://api.openweathermap.org/data/2.5/weather?q=Moscow&appid=619769815d2e235e82cf7ee1a4435658&units=metric"
     );
   });
 
