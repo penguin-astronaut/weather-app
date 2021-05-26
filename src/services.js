@@ -41,11 +41,11 @@ function addCityToLocalStorage(city) {
     throw new Error("City must be string");
   }
 
-  const cityClear = String(city).trim().toLowerCase();
-  if (cityClear.length < 1) {
+  const cityFormated = String(city).trim().toLowerCase();
+  if (cityFormated.length < 1) {
     throw new Error("City can't be empty");
   }
-  const cityCapitalized = cityClear[0].toUpperCase() + cityClear.slice(1);
+  const cityCapitalized = cityFormated[0].toUpperCase() + cityFormated.slice(1);
 
   const storageCities = localStorage.getItem("cites");
   const cites = JSON.parse(storageCities) ?? [];
