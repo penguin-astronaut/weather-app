@@ -1,10 +1,11 @@
+import "regenerator-runtime/runtime";
+
 import {
   getWeatherByCity,
   getCity,
   addCityToLocalStorage,
   staticMapUrl,
 } from "./services";
-import "@babel/polyfill";
 
 const originalLocalStorage = global.localStorage;
 afterEach(() => {

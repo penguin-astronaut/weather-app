@@ -1,5 +1,6 @@
+import "regenerator-runtime/runtime";
+
 import { templateInit, updateCitiesList, updateWeatherInfo } from "./domFunc";
-import "@babel/polyfill";
 
 document.body.innerHTML = '<div class="app"></div>';
 const weatherApi = {

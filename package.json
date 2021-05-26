@@ -52,6 +52,6 @@
     "*.{js,css,md}": "prettier --write"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1"
+    "regenerator-runtime": "^0.13.7"
   }
 }
