@@ -1,5 +1,4 @@
 import "regenerator-runtime/runtime";
-
 import {
   getWeatherByCity,
   getCity,

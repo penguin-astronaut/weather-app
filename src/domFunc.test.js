@@ -2,7 +2,21 @@ import "regenerator-runtime/runtime";
 
 import { templateInit, updateCitiesList, updateWeatherInfo } from "./domFunc";
 
-document.body.innerHTML = '<div class="app"></div>';
+const originalAlert = window.alert;
+
+beforeEach(() => {
+  document.body.innerHTML = '<div class="app"></div>';
+  templateInit();
+
+  window.alert = jest.fn();
+});
+
+afterEach(() => {
+  document.body.innerHTML = "";
+
+  window.alert = originalAlert;
+});
+
 const weatherApi = {
   name: "Izhevsk",
   coord: { lon: 53.2333, lat: 56.85 },
@@ -12,7 +26,6 @@ const weatherApi = {
 
 describe("DOM test", () => {
   it("template init", () => {
-    templateInit();
     expect(document.querySelector(".input")).toBeTruthy();
     expect(document.querySelector(".btn")).toBeTruthy();
     expect(document.querySelector(".weather")).toBeTruthy();
@@ -25,10 +38,6 @@ describe("DOM test", () => {
   });
 
   it("form submit false", async () => {
-    window.alert = jest.fn();
-
-    templateInit();
-
     document.querySelector(".input").value = "";
     await document.querySelector(".form").submit();
 
@@ -38,8 +47,6 @@ describe("DOM test", () => {
 
 describe("update info", () => {
   it("should be ok", async () => {
-    templateInit();
-
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
@@ -63,7 +70,6 @@ describe("update info", () => {
   });
 
   it("should be alert", async () => {
-    window.alert = jest.fn();
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: false,
@@ -77,7 +83,6 @@ describe("update info", () => {
 });
 
 describe("updateCitiesList", () => {
-  templateInit();
   it("should be ok", () => {
     jest
       .spyOn(Object.getPrototypeOf(window.localStorage), "getItem")
