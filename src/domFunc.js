@@ -37,7 +37,10 @@ function updateCitiesList() {
   const lastCities = cities.slice(startElement);
 
   lastCities.forEach((item) => {
-    list.insertAdjacentHTML("beforeend", `<li>${item}</li>`);
+    list.insertAdjacentHTML(
+      "beforeend",
+      `<li class="cities__item">${item}</li>`
+    );
   });
 }
 
@@ -74,7 +77,7 @@ function templateInit() {
   });
 
   document.querySelector(".cities").addEventListener("click", (e) => {
-    if (e.target.tagName === "LI") {
+    if (e.target.classList.contains("cities__item")) {
       updateWeatherInfo(e.target.textContent);
     }
   });
