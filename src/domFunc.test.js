@@ -1,5 +1,3 @@
-import "regenerator-runtime/runtime";
-
 import { templateInit, updateCitiesList, updateWeatherInfo } from "./domFunc";
 
 const originalAlert = window.alert;
@@ -30,8 +28,6 @@ describe("DOM test", () => {
     expect(document.querySelector(".btn")).toBeTruthy();
     expect(document.querySelector(".weather")).toBeTruthy();
     expect(document.querySelector(".weather__city")).toBeTruthy();
-    expect(document.querySelector(".weather__temp")).toBeTruthy();
-    expect(document.querySelector(".weather__temp")).toBeTruthy();
     expect(document.querySelector(".weather__temp")).toBeTruthy();
     expect(document.querySelector(".cities")).toBeTruthy();
     expect(document.querySelector(".map")).toBeTruthy();

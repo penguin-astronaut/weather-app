@@ -25,6 +25,7 @@
   "homepage": "https://github.com/penguin-astronaut/weather-app#readme",
   "devDependencies": {
     "@babel/core": "^7.14.3",
+    "@babel/plugin-transform-runtime": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
     "@types/jest": "^26.0.23",
     "babel-loader": "^8.2.2",
@@ -50,8 +51,5 @@
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
-  },
-  "dependencies": {
-    "regenerator-runtime": "^0.13.7"
   }
 }
