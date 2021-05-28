@@ -1,8 +1,6 @@
 name: Build and Deploy
 
-on:
-  repository_dispatch:
-    types: [deploy-event]
+on: push
 
 jobs:
   build-and-deploy:
@@ -10,6 +8,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.1
+
         with:
           ref: ${{ github.event.client_payload.ref }}
 
