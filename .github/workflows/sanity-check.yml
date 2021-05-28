@@ -20,7 +20,7 @@ jobs:
       - name: Deploy dispatch
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository: penguin-astronaut/weather-app/
           event-type: deploy-event
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
