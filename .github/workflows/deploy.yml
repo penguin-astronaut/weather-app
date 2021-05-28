@@ -3,8 +3,7 @@ name: Build and Deploy
 on:
   workflow_run:
     workflows: ["PR Sanity Check"]
-    types:
-      - completed
+    types: ["completed"]
 
 jobs:
   build-and-deploy:
