@@ -1,9 +1,9 @@
 name: Build and Deploy
-on: 
+on:
   workflow_run:
-      workflows: ["PR Sanity Check"]
-      types:
-        - completed
+    workflows: ["PR Sanity Check"]
+    types:
+      - completed
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
