@@ -45,14 +45,18 @@ function addCityToLocalStorage(city) {
   if (cityFormated.length < 1) {
     throw new Error("City can't be empty");
   }
-  const cityCapitalized = cityFormated[0].toUpperCase() + cityFormated.slice(1);
 
-  const storageCities = localStorage.getItem("cites");
-  const cites = JSON.parse(storageCities) ?? [];
-  if (!cites.includes(cityCapitalized)) {
-    cites.push(cityCapitalized);
+  const storageCities = localStorage.getItem("cities");
+
+  const cities = JSON.parse(storageCities) ?? [];
+  if (!cities.includes(cityFormated)) {
+    cities.push(cityFormated);
   }
-  localStorage.setItem("cities", JSON.stringify(cites));
+  if (cities.length > 10) {
+    cities.shift();
+  }
+
+  localStorage.setItem("cities", JSON.stringify(cities));
 }
 
 export { getWeatherByCity, getCity, addCityToLocalStorage, staticMapUrl };

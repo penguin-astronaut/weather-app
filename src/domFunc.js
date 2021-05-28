@@ -33,10 +33,7 @@ function updateCitiesList() {
   list.innerHTML = "";
   const cities = JSON.parse(localStorage.getItem("cities")) ?? [];
 
-  const startElement = cities.length > 10 ? cities.length - 10 : 0;
-  const lastCities = cities.slice(startElement);
-
-  lastCities.forEach((item) => {
+  cities.forEach((item) => {
     list.insertAdjacentHTML(
       "beforeend",
       `<li class="cities__item">${item}</li>`
