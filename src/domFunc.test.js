@@ -87,29 +87,5 @@ describe("updateCitiesList", () => {
       );
     updateCitiesList();
     expect(document.querySelectorAll(".cities li").length).toBe(4);
-
-    jest
-      .spyOn(Object.getPrototypeOf(window.localStorage), "getItem")
-      .mockReturnValueOnce(
-        JSON.stringify([
-          "Moscow",
-          "Izhevsk",
-          "Boston",
-          "London",
-          "New York",
-          "Denver",
-          "Portland",
-          "Chicago",
-          "Los Angeles",
-          "Samara",
-          "Saint Petersburg",
-          "Voronezh",
-        ])
-      );
-    updateCitiesList();
-    expect(document.querySelectorAll(".cities li").length).toBe(10);
-    expect(document.querySelectorAll(".cities li")[0].textContent).toBe(
-      "Boston"
-    );
   });
 });

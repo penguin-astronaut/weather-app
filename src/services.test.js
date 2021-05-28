@@ -5,11 +5,6 @@ import {
   staticMapUrl,
 } from "./services";
 
-const originalLocalStorage = global.localStorage;
-afterEach(() => {
-  global.localStorage = originalLocalStorage;
-});
-
 describe("getWeatherByCity", () => {
   it("should be ok", async () => {
     global.fetch = jest.fn(() =>
@@ -64,28 +59,39 @@ describe("getCity", () => {
 describe("addCityToLocalStorage", () => {
   it("shold be ok", () => {
     jest.spyOn(Object.getPrototypeOf(window.localStorage), "setItem");
+
     addCityToLocalStorage("moscow");
     expect(localStorage.setItem).toBeCalledWith(
       "cities",
-      JSON.stringify(["Moscow"])
+      JSON.stringify(["moscow"])
     );
 
-    jest.spyOn(Object.getPrototypeOf(window.localStorage), "setItem");
-    addCityToLocalStorage(" izhevsk ");
-    expect(localStorage.setItem).toBeCalledWith(
+    addCityToLocalStorage(" Izhevsk ");
+    expect(localStorage.setItem.mock.calls[1]).toEqual([
       "cities",
-      JSON.stringify(["Izhevsk"])
-    );
+      JSON.stringify(["moscow", "izhevsk"]),
+    ]);
 
-    jest.spyOn(Object.getPrototypeOf(window.localStorage), "setItem");
     jest
       .spyOn(Object.getPrototypeOf(window.localStorage), "getItem")
-      .mockReturnValueOnce(JSON.stringify(["Moscow", "Izhevsk"]));
-    addCityToLocalStorage("London");
-    expect(localStorage.setItem).toBeCalledWith(
-      "cities",
-      JSON.stringify(["Moscow", "Izhevsk", "London"])
-    );
+      .mockReturnValueOnce(
+        JSON.stringify([
+          "city1",
+          "city2",
+          "city3",
+          "city4",
+          "city5",
+          "city6",
+          "city7",
+          "city8",
+          "city9",
+          "city10",
+        ])
+      );
+    addCityToLocalStorage("city11");
+    const parsedCitesArr = JSON.parse(localStorage.setItem.mock.calls[2][1]);
+    expect(parsedCitesArr.length).toBe(10);
+    expect(parsedCitesArr[9]).toBe("city11");
   });
 
   it("shold be error", () => {
