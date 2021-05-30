@@ -35,7 +35,7 @@ describe("getWeatherByCity", () => {
     );
 
     expect(await getWeatherByCity("Moscow")).toBeFalsy();
-    expect(() => getWeatherByCity("")).rejects.toThrow("City can't be empty");
+    expect(await getWeatherByCity("")).toBeFalsy();
   });
 });
 
@@ -102,11 +102,8 @@ describe("addCityToLocalStorage", () => {
   });
 
   it("shold be error", () => {
-    expect(() => addCityToLocalStorage("")).toThrow("City can't be empty");
-    expect(() => addCityToLocalStorage("    ")).toThrow("City can't be empty");
-    expect(() => addCityToLocalStorage(["Moscow"])).toThrow(
-      "City must be string"
-    );
+    expect(addCityToLocalStorage("")).toBeFalsy();
+    expect(addCityToLocalStorage("   ")).toBeFalsy();
   });
 });
 
@@ -122,14 +119,8 @@ describe("staticMapUrl", () => {
   });
 
   it("should be error", () => {
-    expect(() => staticMapUrl({ lon: 92.91 })).toThrow(
-      "coords must by object and contain properties lat and lon"
-    );
-    expect(() => staticMapUrl({ lat: 12.01 })).toThrow(
-      "coords must by object and contain properties lat and lon"
-    );
-    expect(() => staticMapUrl([12.01, 92.91])).toThrow(
-      "coords must by object and contain properties lat and lon"
-    );
+    expect(staticMapUrl({ lon: 92.91 })).toBeFalsy();
+    expect(staticMapUrl({ lat: 12.01 })).toBeFalsy();
+    expect(staticMapUrl([12.01, 92.91])).toBeFalsy();
   });
 });

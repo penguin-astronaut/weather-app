@@ -7,7 +7,7 @@ import {
 
 async function getWeatherByCity(city) {
   if (!city) {
-    throw new Error("City can't be empty");
+    return false;
   }
 
   const response = await fetch(
@@ -34,20 +34,16 @@ async function getCity() {
 
 function staticMapUrl(coords) {
   if (typeof coords !== "object" || !coords.lat || !coords.lon) {
-    throw new Error("coords must by object and contain properties lat and lon");
+    return "";
   }
   const { lat, lon } = coords;
   return `${staticMapApiBaseUrl}getmap?key=${staticMapApiKey}&size=600,400&zoom=13&center=${lat},${lon}`;
 }
 
 function addCityToLocalStorage(city) {
-  if (typeof city !== "string") {
-    throw new Error("City must be string");
-  }
-
   const cityFormated = String(city).trim().toLowerCase();
   if (cityFormated.length < 1) {
-    throw new Error("City can't be empty");
+    return;
   }
 
   const storageCities = localStorage.getItem("cities");
