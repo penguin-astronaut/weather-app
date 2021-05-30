@@ -12,9 +12,19 @@ import {
   staticMapUrl,
 } from "./services";
 
+const originalFetch = global.fetch;
+
+beforeEach(() => {
+  global.fetch = jest.fn();
+});
+
+afterEach(() => {
+  global.fetch = originalFetch;
+});
+
 describe("getWeatherByCity", () => {
   it("should be ok", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch.mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ weather: "test" }),
@@ -28,7 +38,7 @@ describe("getWeatherByCity", () => {
   });
 
   it("should be with problem", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch.mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,
       })
@@ -41,7 +51,7 @@ describe("getWeatherByCity", () => {
 
 describe("getCity", () => {
   it("should be ok", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch.mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ city: "Moscow" }),
@@ -53,7 +63,7 @@ describe("getCity", () => {
   });
 
   it("should be false", async () => {
-    global.fetch = jest.fn(() =>
+    global.fetch.mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,
       })
