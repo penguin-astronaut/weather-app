@@ -1,4 +1,11 @@
 import {
+  weatherApiUrl,
+  weatherApipKey,
+  staticMapApiBaseUrl,
+  staticMapApiKey,
+} from "./config";
+
+import {
   getWeatherByCity,
   getCity,
   addCityToLocalStorage,
@@ -16,7 +23,7 @@ describe("getWeatherByCity", () => {
 
     expect(await getWeatherByCity("Moscow")).toEqual({ weather: "test" });
     expect(fetch).toHaveBeenCalledWith(
-      "https://api.openweathermap.org/data/2.5/weather?q=Moscow&appid=619769815d2e235e82cf7ee1a4435658&units=metric"
+      `${weatherApiUrl}weather?q=Moscow&appid=${weatherApipKey}&units=metric`
     );
   });
 
@@ -106,11 +113,11 @@ describe("addCityToLocalStorage", () => {
 describe("staticMapUrl", () => {
   it("should be ok", () => {
     expect(staticMapUrl({ lat: 12.01, lon: 92.91 })).toBe(
-      "https://open.mapquestapi.com/staticmap/v4/getmap?key=JlKtJ5EFyri7nHAgFPPohAADdjnGYR4N&size=600,400&zoom=13&center=12.01,92.91"
+      `${staticMapApiBaseUrl}getmap?key=${staticMapApiKey}&size=600,400&zoom=13&center=12.01,92.91`
     );
 
     expect(staticMapUrl({ lon: 12.01, lat: 92.91 })).toBe(
-      "https://open.mapquestapi.com/staticmap/v4/getmap?key=JlKtJ5EFyri7nHAgFPPohAADdjnGYR4N&size=600,400&zoom=13&center=92.91,12.01"
+      `${staticMapApiBaseUrl}getmap?key=${staticMapApiKey}&size=600,400&zoom=13&center=92.91,12.01`
     );
   });
 

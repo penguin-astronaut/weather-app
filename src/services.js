@@ -1,12 +1,17 @@
+import {
+  weatherApiUrl,
+  weatherApipKey,
+  staticMapApiBaseUrl,
+  staticMapApiKey,
+} from "./config";
+
 async function getWeatherByCity(city) {
   if (!city) {
     throw new Error("City can't be empty");
   }
-  const key = "619769815d2e235e82cf7ee1a4435658";
-  const baseUrl = "https://api.openweathermap.org/data/2.5/";
 
   const response = await fetch(
-    `${baseUrl}weather?q=${city}&appid=${key}&units=metric`
+    `${weatherApiUrl}weather?q=${city}&appid=${weatherApipKey}&units=metric`
   );
 
   if (response.ok) {
@@ -32,8 +37,7 @@ function staticMapUrl(coords) {
     throw new Error("coords must by object and contain properties lat and lon");
   }
   const { lat, lon } = coords;
-  const key = "JlKtJ5EFyri7nHAgFPPohAADdjnGYR4N";
-  return `https://open.mapquestapi.com/staticmap/v4/getmap?key=${key}&size=600,400&zoom=13&center=${lat},${lon}`;
+  return `${staticMapApiBaseUrl}getmap?key=${staticMapApiKey}&size=600,400&zoom=13&center=${lat},${lon}`;
 }
 
 function addCityToLocalStorage(city) {
