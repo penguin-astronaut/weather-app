@@ -74,7 +74,7 @@ function templateInit() {
   });
 
   document.querySelector(".cities").addEventListener("click", (e) => {
-    if (e.target.classList.contains("cities__item")) {
+    if (e.target.textContent) {
       updateWeatherInfo(e.target.textContent);
     }
   });

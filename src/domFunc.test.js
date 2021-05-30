@@ -1,4 +1,5 @@
 import { templateInit, updateCitiesList, updateWeatherInfo } from "./domFunc";
+import { weatherApiUrl, weatherApipKey } from "./config";
 
 const originalAlert = window.alert;
 
@@ -51,7 +52,7 @@ describe("update info", () => {
     );
     expect(await updateWeatherInfo("izhevsk")).toBeTruthy();
     expect(fetch).toBeCalledWith(
-      "https://api.openweathermap.org/data/2.5/weather?q=izhevsk&appid=619769815d2e235e82cf7ee1a4435658&units=metric"
+      `${weatherApiUrl}weather?q=izhevsk&appid=${weatherApipKey}&units=metric`
     );
 
     expect(document.querySelector(".weather__city span").innerHTML).toBe(
