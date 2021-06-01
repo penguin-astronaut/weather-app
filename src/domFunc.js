@@ -71,6 +71,7 @@ function templateInit() {
       addCityToLocalStorage(city);
       updateCitiesList();
     }
+    document.querySelector(".input").value = "";
   });
 
   document.querySelector(".cities").addEventListener("click", (e) => {
