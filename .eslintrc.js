@@ -4,13 +4,18 @@ module.exports = {
     es2021: true,
     "jest/globals": true,
   },
-  extends: ["airbnb-base", "prettier"],
+  parser: "@typescript-eslint/parser",
+  extends: ["airbnb-base", "plugin:@typescript-eslint/recommended", "prettier"],
   parserOptions: {
     ecmaVersion: 12,
     sourceType: "module",
   },
   rules: {
     "no-alert": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": ["warn", "never"],
+    "import/prefer-default-export": "off",
+    "no-param-reassign": "off",
   },
-  plugins: ["jest"],
+  plugins: ["jest", "@typescript-eslint"],
 };
