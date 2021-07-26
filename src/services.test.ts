@@ -24,7 +24,7 @@ afterEach(() => {
 
 describe("getWeatherByCity", () => {
   it("should be ok", async () => {
-    global.fetch.mockImplementationOnce(() =>
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ weather: "test" }),
@@ -38,7 +38,7 @@ describe("getWeatherByCity", () => {
   });
 
   it("should be with problem", async () => {
-    global.fetch.mockImplementationOnce(() =>
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,
       })
@@ -51,7 +51,7 @@ describe("getWeatherByCity", () => {
 
 describe("getCity", () => {
   it("should be ok", async () => {
-    global.fetch.mockImplementationOnce(() =>
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ city: "Moscow" }),
@@ -63,7 +63,7 @@ describe("getCity", () => {
   });
 
   it("should be false", async () => {
-    global.fetch.mockImplementationOnce(() =>
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,
       })
@@ -84,7 +84,7 @@ describe("addCityToLocalStorage", () => {
     );
 
     addCityToLocalStorage(" Izhevsk ");
-    expect(localStorage.setItem.mock.calls[1]).toEqual([
+    expect((localStorage.setItem as jest.Mock).mock.calls[1]).toEqual([
       "cities",
       JSON.stringify(["moscow", "izhevsk"]),
     ]);
@@ -106,7 +106,9 @@ describe("addCityToLocalStorage", () => {
         ])
       );
     addCityToLocalStorage("city11");
-    const parsedCitesArr = JSON.parse(localStorage.setItem.mock.calls[2][1]);
+    const parsedCitesArr = JSON.parse(
+      (localStorage.setItem as jest.Mock).mock.calls[2][1]
+    );
     expect(parsedCitesArr.length).toBe(10);
     expect(parsedCitesArr[9]).toBe("city11");
   });
@@ -131,6 +133,5 @@ describe("staticMapUrl", () => {
   it("should be error", () => {
     expect(staticMapUrl({ lon: 92.91 })).toBeFalsy();
     expect(staticMapUrl({ lat: 12.01 })).toBeFalsy();
-    expect(staticMapUrl([12.01, 92.91])).toBeFalsy();
   });
 });

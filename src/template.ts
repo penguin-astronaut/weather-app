@@ -14,7 +14,7 @@ export function template(tpl: string, data: Record<string, any>): string {
           isFirst: index === 0,
           isLast: data[listName].length === index + 1,
         };
-        newData[itemName] = item;
+        (newData as any)[itemName] = item;
         return template(body, newData);
       });
       return result.join("");

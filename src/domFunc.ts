@@ -33,7 +33,7 @@ function updateCitiesList(): void {
   list.innerHTML = "";
   const cities = JSON.parse(localStorage.getItem("cities")) ?? [];
 
-  cities.forEach((item) => {
+  cities.forEach((item: string) => {
     list.insertAdjacentHTML(
       "beforeend",
       `<li class="cities__item">${item}</li>`

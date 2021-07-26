@@ -35,8 +35,8 @@ describe("DOM test", () => {
   });
 
   it("form submit false", async () => {
-    document.querySelector(".input").value = "";
-    await document.querySelector(".form").submit();
+    (document.querySelector(".input") as HTMLInputElement).value = "";
+    await (document.querySelector(".form") as HTMLFormElement).submit();
 
     expect(window.alert).toBeCalledWith("Input can't be null");
   });
@@ -44,7 +44,7 @@ describe("DOM test", () => {
 
 describe("update info", () => {
   it("should be ok", async () => {
-    global.fetch = jest.fn(() =>
+    (global as any).fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve(weatherApi),
@@ -61,13 +61,15 @@ describe("update info", () => {
     expect(document.querySelector(".weather__temp span").innerHTML).toBe(
       `${weatherApi.main.temp}	℃`
     );
-    expect(document.querySelector(".weather__icon").src).toBe(
+    expect(
+      (document.querySelector(".weather__icon") as HTMLImageElement).src
+    ).toBe(
       `https://openweathermap.org/img/wn/${weatherApi.weather[0].icon}.png`
     );
   });
 
   it("should be alert", async () => {
-    global.fetch = jest.fn(() =>
+    (global as any).fetch = jest.fn(() =>
       Promise.resolve({
         ok: false,
       })

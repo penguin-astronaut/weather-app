@@ -7,7 +7,7 @@ import "./style.css";
   templateInit();
   const city = await getCity();
   if (city) {
-    updateWeatherInfo(city);
+    updateWeatherInfo(city as string);
   }
   updateCitiesList();
 })();
