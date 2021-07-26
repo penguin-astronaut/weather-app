@@ -4,13 +4,13 @@ import {
   staticMapUrl,
 } from "./services";
 
-function renderMap(coords) {
+function renderMap(coords: Coord): void {
   const img = staticMapUrl(coords);
   document.querySelector(".map").innerHTML = `<img src="${img}"/>`;
 }
 
-async function updateWeatherInfo(city) {
-  const weather = await getWeatherByCity(city);
+async function updateWeatherInfo(city: string): Promise<boolean> {
+  const weather = (await getWeatherByCity(city)) as Record<string, any>;
   if (!weather) {
     alert("Something is wrong, are you sure you entered the correct city?");
     return false;
@@ -20,15 +20,15 @@ async function updateWeatherInfo(city) {
   document.querySelector(
     ".weather__temp span"
   ).innerHTML = `${weather.main.temp}	&#8451;`;
-  document.querySelector(
-    ".weather__icon"
+  (
+    document.querySelector(".weather__icon") as HTMLImageElement
   ).src = `https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`;
 
   renderMap(weather.coord);
   return true;
 }
 
-function updateCitiesList() {
+function updateCitiesList(): void {
   const list = document.querySelector(".cities");
   list.innerHTML = "";
   const cities = JSON.parse(localStorage.getItem("cities")) ?? [];
@@ -41,7 +41,7 @@ function updateCitiesList() {
   });
 }
 
-function templateInit() {
+function templateInit(): void {
   const template = `<form class="form"><input class="input" type="text" placeholder="input city">
   <button class="btn" type="submit">Get Weather</button></form>
   <div class="weather">
@@ -61,7 +61,9 @@ function templateInit() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const city = document.querySelector(".input").value.trim();
+    const city = (
+      document.querySelector(".input") as HTMLInputElement
+    ).value.trim();
     if (!city) {
       alert("Input can't be null");
       return;
@@ -71,12 +73,12 @@ function templateInit() {
       addCityToLocalStorage(city);
       updateCitiesList();
     }
-    document.querySelector(".input").value = "";
+    (document.querySelector(".input") as HTMLInputElement).value = "";
   });
 
   document.querySelector(".cities").addEventListener("click", (e) => {
-    if (e.target.textContent) {
-      updateWeatherInfo(e.target.textContent);
+    if ((e.target as HTMLElement).textContent) {
+      updateWeatherInfo((e.target as HTMLElement).textContent);
     }
   });
 }

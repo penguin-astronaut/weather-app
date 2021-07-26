@@ -27,7 +27,8 @@ export function template(tpl: string, data: Record<string, any>): string {
       const [name, subName] = varibleName.split(".");
       if (typeof subName !== "undefined" && data[name][subName]) {
         return template(body, data);
-      } if (typeof subName !== "undefined" && !data[name][subName]) {
+      }
+      if (typeof subName !== "undefined" && !data[name][subName]) {
         return "";
       }
       return data[name] ? template(body, data) : "";
@@ -40,7 +41,8 @@ export function template(tpl: string, data: Record<string, any>): string {
       const [name, subName] = valueName.split(".");
       if (typeof subName !== "undefined" && data[name][subName]) {
         return data[name][subName];
-      } if (typeof subName !== "undefined" && !data[name][subName]) {
+      }
+      if (typeof subName !== "undefined" && !data[name][subName]) {
         return "";
       }
 

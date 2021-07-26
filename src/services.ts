@@ -5,7 +5,9 @@ import {
   staticMapApiKey,
 } from "./config";
 
-async function getWeatherByCity(city) {
+async function getWeatherByCity(
+  city: string
+): Promise<boolean | Promise<Record<string, any>>> {
   if (!city) {
     return false;
   }
@@ -21,7 +23,7 @@ async function getWeatherByCity(city) {
   return false;
 }
 
-async function getCity() {
+async function getCity(): Promise<boolean | string> {
   const response = await fetch("https://get.geojs.io/v1/ip/geo.json");
 
   if (!response.ok) {
@@ -32,7 +34,7 @@ async function getCity() {
   return res.city;
 }
 
-function staticMapUrl(coords) {
+function staticMapUrl(coords: Coord): string {
   if (typeof coords !== "object" || !coords.lat || !coords.lon) {
     return "";
   }
@@ -40,7 +42,7 @@ function staticMapUrl(coords) {
   return `${staticMapApiBaseUrl}getmap?key=${staticMapApiKey}&size=600,400&zoom=13&center=${lat},${lon}`;
 }
 
-function addCityToLocalStorage(city) {
+function addCityToLocalStorage(city: string): void {
   const cityFormated = String(city).trim().toLowerCase();
   if (cityFormated.length < 1) {
     return;
