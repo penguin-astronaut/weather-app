@@ -1,4 +1,4 @@
-import { template } from "./template";
+import { template } from "../template";
 
 interface State {
   [key: string]: any;
@@ -33,9 +33,7 @@ export abstract class Component {
     this.el.innerHTML = template(this.template(), this.state);
   }
 
-  protected onMount(): void {
-    return null;
-  }
+  protected abstract onMount(): void;
 
   setState = (patch: Partial<State>): void => {
     this.state = { ...this.state, ...patch };
