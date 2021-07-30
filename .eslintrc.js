@@ -16,6 +16,8 @@ module.exports = {
     "import/extensions": ["warn", "never"],
     "import/prefer-default-export": "off",
     "no-param-reassign": "off",
+    "max-classes-per-file": "off",
+    "class-methods-use-this": "off",
   },
   plugins: ["jest", "@typescript-eslint"],
 };
