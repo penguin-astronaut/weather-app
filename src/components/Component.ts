@@ -1,10 +1,6 @@
 import { template } from "../template";
 
-interface State {
-  [key: string]: any;
-}
-
-export abstract class Component {
+export abstract class Component<State = Record<string, any>> {
   protected el: HTMLDivElement;
 
   protected state: State = {} as State;
@@ -25,15 +21,15 @@ export abstract class Component {
     }, 0);
   }
 
-  protected template(): string {
-    return "";
-  }
+  protected abstract template(): string;
 
   private render(): void {
     this.el.innerHTML = template(this.template(), this.state);
   }
 
-  protected abstract onMount(): void;
+  protected onMount(): void {
+    return null;
+  }
 
   setState = (patch: Partial<State>): void => {
     this.state = { ...this.state, ...patch };

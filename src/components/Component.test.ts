@@ -11,7 +11,11 @@ describe("Component", () => {
 
   it("is a class", () => {
     expect(Component).toBeInstanceOf(Function);
-    class TestComponent extends Component {}
+    class TestComponent extends Component {
+      template() {
+        return "";
+      }
+    }
     expect(new TestComponent(el)).toBeInstanceOf(Component);
   });
 
