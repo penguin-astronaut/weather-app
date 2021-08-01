@@ -25,12 +25,10 @@ async function getWeatherByCity(
 
 async function getCity(): Promise<boolean | string> {
   const response = await fetch("https://get.geojs.io/v1/ip/geo.json");
-
   if (!response.ok) {
     return false;
   }
   const res = await response.json();
-
   return res.city;
 }
 

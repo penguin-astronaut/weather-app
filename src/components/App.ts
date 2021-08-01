@@ -51,7 +51,6 @@ export default class App extends Component {
 
   events = {
     "submit@.form": async (e: Event): Promise<void> => {
-      e.preventDefault();
       const city = (
         document.querySelector(".input") as HTMLInputElement
       ).value.trim();
