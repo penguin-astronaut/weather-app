@@ -1,13 +1,7 @@
-import { templateInit, updateCitiesList, updateWeatherInfo } from "./domFunc";
-import { getCity } from "./services";
-
+import App from "./components/App";
 import "./style.css";
 
 (async () => {
-  templateInit();
-  const city = await getCity();
-  if (city) {
-    updateWeatherInfo(city as string);
-  }
-  updateCitiesList();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const app = new App(document.querySelector(".app"));
 })();

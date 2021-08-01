@@ -129,9 +129,4 @@ describe("staticMapUrl", () => {
       `${staticMapApiBaseUrl}getmap?key=${staticMapApiKey}&size=600,400&zoom=13&center=92.91,12.01`
     );
   });
-
-  it("should be error", () => {
-    expect(staticMapUrl({ lon: 92.91 })).toBeFalsy();
-    expect(staticMapUrl({ lat: 12.01 })).toBeFalsy();
-  });
 });

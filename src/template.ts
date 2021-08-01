@@ -7,7 +7,7 @@ export function template(tpl: string, data?: Record<string, any>): string {
       listName: string,
       body: string
     ): string => {
-      const result = data[listName].map((item: any, index: number) => {
+      const result = data[listName]?.map((item: any, index: number) => {
         const newData = {
           ...data,
           index,
@@ -17,7 +17,7 @@ export function template(tpl: string, data?: Record<string, any>): string {
         (newData as any)[itemName] = item;
         return template(body, newData);
       });
-      return result.join("");
+      return result ? result.join("") : [];
     }
   );
 

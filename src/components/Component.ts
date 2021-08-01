@@ -5,7 +5,7 @@ export abstract class Component<State = Record<string, any>> {
 
   protected state: State = {} as State;
 
-  protected events: Record<string, () => void> = {} as Record<
+  protected events: Record<string, (event?: Event) => void> = {} as Record<
     string,
     () => void
   >;
