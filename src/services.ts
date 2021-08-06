@@ -5,11 +5,14 @@ import {
   staticMapApiKey,
 } from "./config";
 
+export const ERROR_INCORRECT_CITY = 1;
+export const ERROR_API_CONNECTION = 2;
+
 async function getWeatherByCity(
   city: string
-): Promise<boolean | Promise<Record<string, any>>> {
+): Promise<number | Promise<Record<string, any>>> {
   if (!city) {
-    return false;
+    return ERROR_INCORRECT_CITY;
   }
 
   const response = await fetch(
@@ -20,7 +23,11 @@ async function getWeatherByCity(
     return response.json();
   }
 
-  return false;
+  if (response.status >= 400 && response.status < 500) {
+    return ERROR_INCORRECT_CITY;
+  }
+
+  return ERROR_API_CONNECTION;
 }
 
 async function getCity(): Promise<boolean | string> {

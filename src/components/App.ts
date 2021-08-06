@@ -1,5 +1,7 @@
 import {
   addCityToLocalStorage,
+  ERROR_API_CONNECTION,
+  ERROR_INCORRECT_CITY,
   getCity,
   getWeatherByCity,
   staticMapUrl,
@@ -69,19 +71,22 @@ export default class App extends Component {
   };
 
   private async updateCity(city: string) {
-    const weather = (await getWeatherByCity(city)) as Record<string, any>;
-    if (!weather) {
+    const weather = await getWeatherByCity(city);
+    if (weather === ERROR_INCORRECT_CITY) {
       alert("Something is wrong, are you sure you entered the correct city?");
       return;
+    } else if (weather === ERROR_API_CONNECTION) {
+      alert("server side problem please try again later");
+      return;
     }
+
     addCityToLocalStorage(city);
     const cities = JSON.parse(localStorage.getItem("cities"));
-
-    const mapImg = staticMapUrl(weather.coord);
+    const mapImg = staticMapUrl((weather as Record<string, any>).coord);
 
     this.setState({
-      city: weather.name,
-      weatherIcon: weather.weather[0].icon,
+      city: (weather as Record<string, any>).name,
+      weatherIcon: (weather as Record<string, any>).weather[0].icon,
       cities,
       mapImg,
     });

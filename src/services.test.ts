@@ -10,6 +10,8 @@ import {
   getCity,
   addCityToLocalStorage,
   staticMapUrl,
+  ERROR_INCORRECT_CITY,
+  ERROR_API_CONNECTION,
 } from "./services";
 
 const originalFetch = global.fetch;
@@ -41,11 +43,20 @@ describe("getWeatherByCity", () => {
     (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,
+        status: 404,
       })
     );
 
-    expect(await getWeatherByCity("Moscow")).toBeFalsy();
-    expect(await getWeatherByCity("")).toBeFalsy();
+    expect(await getWeatherByCity("Moscow")).toBe(ERROR_INCORRECT_CITY);
+    expect(await getWeatherByCity("")).toBe(ERROR_INCORRECT_CITY);
+
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
+      Promise.resolve({
+        ok: false,
+        status: 500,
+      })
+    );
+    expect(await getWeatherByCity("City")).toBe(ERROR_API_CONNECTION);
   });
 });
 
