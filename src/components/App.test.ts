@@ -96,7 +96,7 @@ describe("App test", () => {
     expect(document.querySelectorAll(".cities__item").length).toBe(3);
   });
 
-  it.skip("form submit", async () => {
+  it("form submit", async () => {
     new App(document.querySelector(".app"));
     await sleep(20);
     (global as any).fetch = jest.fn(() =>
@@ -108,17 +108,17 @@ describe("App test", () => {
 
     const cityName = "Minsk";
     const input = document.querySelector(".input") as HTMLInputElement;
-    input.value = "Minsk";
+    input.value = cityName;
     (document.querySelector(".form") as HTMLFormElement).submit();
     weatherData.name = cityName;
-
+    await sleep(50);
     expect(global.fetch as jest.Mock).toBeCalledWith(
       `${weatherApiUrl}weather?q=${weatherData.name}&appid=${weatherApipKey}&units=metric`
     );
     expect(document.querySelector(".weather__city span").innerHTML).toBe(
       weatherData.name
     );
-    expect(document.querySelectorAll(".cities__item").length).toBe(5);
+    expect(document.querySelectorAll(".cities__item").length).toBe(4);
     expect((document.querySelector(".input") as HTMLInputElement).value).toBe(
       ""
     );
