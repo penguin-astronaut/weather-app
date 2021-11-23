@@ -1,8 +1,15 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+import * as path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
-module.exports = {
-  entry: "./src/index.js",
+import { Configuration as WebpackConfiguration } from "webpack";
+import { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
+
+interface Configuration extends WebpackConfiguration {
+  devServer?: WebpackDevServerConfiguration;
+}
+
+const config: Configuration = {
+  entry: "./src/index.ts",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
@@ -22,10 +29,14 @@ module.exports = {
     port: 9000,
   },
 
+  resolve: {
+    extensions: [".js", ".ts"],
+  },
+
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -38,3 +49,5 @@ module.exports = {
     ],
   },
 };
+
+export default config;

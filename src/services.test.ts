@@ -10,6 +10,8 @@ import {
   getCity,
   addCityToLocalStorage,
   staticMapUrl,
+  ERROR_INCORRECT_CITY,
+  ERROR_API_CONNECTION,
 } from "./services";
 
 const originalFetch = global.fetch;
@@ -24,7 +26,7 @@ afterEach(() => {
 
 describe("getWeatherByCity", () => {
   it("should be ok", async () => {
-    global.fetch.mockImplementationOnce(() =>
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ weather: "test" }),
@@ -38,20 +40,29 @@ describe("getWeatherByCity", () => {
   });
 
   it("should be with problem", async () => {
-    global.fetch.mockImplementationOnce(() =>
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,
+        status: 404,
       })
     );
 
-    expect(await getWeatherByCity("Moscow")).toBeFalsy();
-    expect(await getWeatherByCity("")).toBeFalsy();
+    expect(await getWeatherByCity("Moscow")).toBe(ERROR_INCORRECT_CITY);
+    expect(await getWeatherByCity("")).toBe(ERROR_INCORRECT_CITY);
+
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
+      Promise.resolve({
+        ok: false,
+        status: 500,
+      })
+    );
+    expect(await getWeatherByCity("City")).toBe(ERROR_API_CONNECTION);
   });
 });
 
 describe("getCity", () => {
   it("should be ok", async () => {
-    global.fetch.mockImplementationOnce(() =>
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ city: "Moscow" }),
@@ -63,7 +74,7 @@ describe("getCity", () => {
   });
 
   it("should be false", async () => {
-    global.fetch.mockImplementationOnce(() =>
+    (global.fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,
       })
@@ -84,7 +95,7 @@ describe("addCityToLocalStorage", () => {
     );
 
     addCityToLocalStorage(" Izhevsk ");
-    expect(localStorage.setItem.mock.calls[1]).toEqual([
+    expect((localStorage.setItem as jest.Mock).mock.calls[1]).toEqual([
       "cities",
       JSON.stringify(["moscow", "izhevsk"]),
     ]);
@@ -106,7 +117,9 @@ describe("addCityToLocalStorage", () => {
         ])
       );
     addCityToLocalStorage("city11");
-    const parsedCitesArr = JSON.parse(localStorage.setItem.mock.calls[2][1]);
+    const parsedCitesArr = JSON.parse(
+      (localStorage.setItem as jest.Mock).mock.calls[2][1]
+    );
     expect(parsedCitesArr.length).toBe(10);
     expect(parsedCitesArr[9]).toBe("city11");
   });
@@ -126,11 +139,5 @@ describe("staticMapUrl", () => {
     expect(staticMapUrl({ lon: 12.01, lat: 92.91 })).toBe(
       `${staticMapApiBaseUrl}getmap?key=${staticMapApiKey}&size=600,400&zoom=13&center=92.91,12.01`
     );
-  });
-
-  it("should be error", () => {
-    expect(staticMapUrl({ lon: 92.91 })).toBeFalsy();
-    expect(staticMapUrl({ lat: 12.01 })).toBeFalsy();
-    expect(staticMapUrl([12.01, 92.91])).toBeFalsy();
   });
 });
